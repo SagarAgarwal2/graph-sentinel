@@ -3,9 +3,9 @@ import {
   FileText, Plus, Download, X, ChevronRight, Timer, Send,
   CheckCircle, AlertTriangle, Sparkles,
 } from 'lucide-react';
-import { supabase, type FraudAlert, type Account, type Transaction, type StrCtrReport } from '../lib/supabase';
+import { type FraudAlert, type Account, type Transaction, type StrCtrReport } from '../lib/supabase';
 import { formatCurrency, formatDateTime, timeAgo, patternLabel, severityBg, statusBg } from '../lib/formatters';
-import { generateGoAMLXml } from '../lib/goaml';
+import { fetchAccounts, fetchAlerts, fetchReports, fetchTransactions, generateReport as createReport, updateReport } from '../lib/api';
 
 type Step = 'list' | 'select' | 'preview';
 
@@ -25,16 +25,16 @@ export default function Reports() {
 
   useEffect(() => {
     const load = async () => {
-      const [repRes, alertRes, accRes, txnRes] = await Promise.all([
-        supabase.from('str_ctr_reports').select('*').order('created_at', { ascending: false }),
-        supabase.from('fraud_alerts').select('*').order('created_at', { ascending: false }),
-        supabase.from('accounts').select('*'),
-        supabase.from('transactions').select('*'),
+      const [repData, alertData, accData, txnData] = await Promise.all([
+        fetchReports(),
+        fetchAlerts(),
+        fetchAccounts(),
+        fetchTransactions(2000),
       ]);
-      setReports(repRes.data || []);
-      setAlerts(alertRes.data || []);
-      setAccounts(accRes.data || []);
-      setTransactions(txnRes.data || []);
+      setReports(repData);
+      setAlerts(alertData);
+      setAccounts(accData);
+      setTransactions(txnData);
       setLoading(false);
     };
     load();
@@ -42,7 +42,7 @@ export default function Reports() {
 
   const confirmedAlerts = alerts.filter((a) => a.status === 'confirmed');
 
-  const generateReport = async () => {
+  const handleGenerateReport = async () => {
     if (selectedAlertIds.length === 0) return;
     setGenerating(true);
     const startTime = Date.now();
@@ -55,46 +55,42 @@ export default function Reports() {
     const involvedAccs = accounts.filter((a) => allAccIds.includes(a.id));
     const totalAmount = selectedAlerts.reduce((s, a) => s + a.total_amount, 0);
     const genTimeSecs = Math.round((Date.now() - startTime) / 1000);
-    const reportId = `RPT_${Date.now()}`;
     const defaultNarrative = narrative ||
       `${reportType} Report: Suspicious activity detected across ${selectedAlerts.length} alert(s) involving ${allAccIds.length} accounts. Total suspicious transaction value: ${formatCurrency(totalAmount)}. Pattern types: ${[...new Set(selectedAlerts.map((a) => patternLabel(a.pattern_type)))].join(', ')}. AI analysis indicates high-confidence fraud indicators. Immediate investigation and regulatory reporting recommended.`;
-
-    const subjectAcc = involvedAccs[0];
-    const xml = generateGoAMLXml(
-      { id: reportId, report_type: reportType, narrative: defaultNarrative },
-      selectedAlerts, involvedAccs, involvedTxns
-    );
-
-    const newReport: Partial<StrCtrReport> = {
-      id: reportId, alert_ids: selectedAlertIds, report_type: reportType, goaml_xml: xml,
+    const result = await createReport({
+      alertIds: selectedAlertIds,
+      reportType,
       narrative: defaultNarrative,
-      subject_details: {
-        reporting_entity: 'Union Bank of India',
-        branch: subjectAcc?.bank_branch || 'Multiple Branches',
-        officer: 'Chief Compliance Officer',
-        date: new Date().toISOString().split('T')[0],
-      },
+      submissionStatus: 'draft',
+    });
+    const inserted = {
+      ...result.report,
+      alert_ids: selectedAlertIds,
+      generation_time_seconds: genTimeSecs,
+      created_at: new Date().toISOString(),
       transaction_summary: {
-        total_amount: totalAmount, transaction_count: allTxnIds.length,
+        total_amount: totalAmount,
+        transaction_count: allTxnIds.length,
         account_count: allAccIds.length,
         channels: [...new Set(involvedTxns.map((t) => t.channel))],
       },
-      generation_time_seconds: genTimeSecs,
-      submission_status: 'draft',
-    };
-
-    await supabase.from('str_ctr_reports').insert(newReport);
-    const inserted = { ...newReport, created_at: new Date().toISOString() } as StrCtrReport;
+      subject_details: {
+        reporting_entity: 'Union Bank of India',
+        branch: involvedAccs[0]?.bank_branch || 'Multiple Branches',
+        officer: 'Chief Compliance Officer',
+        date: new Date().toISOString().split('T')[0],
+      },
+    } as StrCtrReport;
     setReports((prev) => [inserted, ...prev]);
     setPreviewReport(inserted);
-    setGeneratedXml(xml);
+    setGeneratedXml(result.xml);
     setStep('preview');
     setGenerating(false);
   };
 
   const submitReport = async (id: string) => {
     const now = new Date().toISOString();
-    await supabase.from('str_ctr_reports').update({ submission_status: 'submitted', submitted_at: now }).eq('id', id);
+    await updateReport({ id, submission_status: 'submitted', submitted_at: now });
     setReports((prev) => prev.map((r) => r.id === id ? { ...r, submission_status: 'submitted', submitted_at: now } : r));
     if (previewReport?.id === id) setPreviewReport((r) => r ? { ...r, submission_status: 'submitted' } : null);
   };
@@ -214,7 +210,7 @@ export default function Reports() {
         </div>
 
         <button
-          onClick={generateReport}
+          onClick={handleGenerateReport}
           disabled={selectedAlertIds.length === 0 || generating}
           className="btn-primary w-full py-3 text-[13px]"
         >

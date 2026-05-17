@@ -3,9 +3,9 @@ import { Outlet, NavLink, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard, GitFork, ShieldAlert, FileText,
   Network, Settings, Bell, ChevronLeft, ChevronRight,
-  Activity, AlertTriangle, Shield,
+  AlertTriangle, Shield, Activity
 } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { fetchDashboardSummary } from '../lib/api';
 
 const navItems = [
   { to: '/dashboard',  icon: LayoutDashboard, label: 'Dashboard' },
@@ -13,6 +13,7 @@ const navItems = [
   { to: '/alerts',     icon: ShieldAlert,     label: 'Fraud Alerts',    badge: true },
   { to: '/reports',    icon: FileText,        label: 'STR / CTR Reports' },
   { to: '/federated',  icon: Network,         label: 'Federated Network' },
+  { to: '/simulator',  icon: Activity,        label: 'Transaction Simulator' },
   { to: '/settings',   icon: Settings,        label: 'Settings' },
 ];
 
@@ -22,6 +23,7 @@ const PAGE_META: Record<string, { title: string; sub: string }> = {
   '/alerts':     { title: 'Fraud Alert Workbench',       sub: 'AI-powered fraud detection with SHAP causal analysis' },
   '/reports':    { title: 'STR / CTR Reports',           sub: 'Auto-generated goAML-compliant documentation' },
   '/federated':  { title: 'Federated Learning Network',  sub: '26-bank privacy-preserving AI network' },
+  '/simulator':  { title: 'Transaction Simulator',       sub: 'Simulate manual transfers or trigger pre-defined ML fraud scenarios' },
   '/settings':   { title: 'Settings & Configuration',    sub: 'Detection thresholds, routing rules and audit trail' },
 };
 
@@ -33,21 +35,13 @@ export default function Layout() {
 
   useEffect(() => {
     const fetchAlerts = async () => {
-      const { count } = await supabase
-        .from('fraud_alerts')
-        .select('*', { count: 'exact', head: true })
-        .eq('status', 'open');
-      setOpenAlerts(count || 0);
+      const summary = await fetchDashboardSummary();
+      setOpenAlerts(summary.openAlerts || 0);
     };
     fetchAlerts();
 
-    const channel = supabase
-      .channel('layout_alerts')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'fraud_alerts' }, fetchAlerts)
-      .subscribe();
-
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
-    return () => { supabase.removeChannel(channel); clearInterval(timer); };
+    return () => { clearInterval(timer); };
   }, []);
 
   const meta = PAGE_META[location.pathname] ?? { title: 'GraphSentinel', sub: '' };

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Clock, User, ShieldCheck, Check, AlertCircle } from 'lucide-react';
-import { supabase, type FraudPattern, type InvestigatorFeedback } from '../lib/supabase';
+import { type FraudPattern, type InvestigatorFeedback } from '../lib/supabase';
 import { timeAgo, statusBg } from '../lib/formatters';
+import { fetchAuditLog, fetchPatterns, updatePattern } from '../lib/api';
 
 export default function Settings() {
   const [patterns, setPatterns] = useState<FraudPattern[]>([]);
@@ -13,12 +14,12 @@ export default function Settings() {
 
   useEffect(() => {
     const load = async () => {
-      const [patRes, auditRes] = await Promise.all([
-        supabase.from('fraud_patterns').select('*'),
-        supabase.from('investigator_feedback').select('*').order('created_at', { ascending: false }).limit(30),
+      const [patternsData, auditData] = await Promise.all([
+        fetchPatterns(),
+        fetchAuditLog(30),
       ]);
-      setPatterns(patRes.data || []);
-      setAuditLog(auditRes.data || []);
+      setPatterns(patternsData);
+      setAuditLog(auditData);
       setLoading(false);
     };
     load();
@@ -33,13 +34,14 @@ export default function Settings() {
     const pattern = patterns.find((p) => p.id === id);
     if (!pattern) return;
     setSaving(id);
-    await supabase.from('fraud_patterns').update({
+    await updatePattern({
+      id,
       amount_ceiling: pattern.amount_ceiling,
       time_window_hours: pattern.time_window_hours,
       hop_count: pattern.hop_count,
       multiplier: pattern.multiplier,
       is_enabled: pattern.is_enabled,
-    }).eq('id', id);
+    });
     setSaving(null);
     setDirtyPatterns((prev) => { const s = new Set(prev); s.delete(id); return s; });
     setSavedRecently((prev) => new Set(prev).add(id));
@@ -48,7 +50,7 @@ export default function Settings() {
 
   const togglePattern = async (id: string, value: boolean) => {
     setPatterns((prev) => prev.map((p) => (p.id === id ? { ...p, is_enabled: value } : p)));
-    await supabase.from('fraud_patterns').update({ is_enabled: value }).eq('id', id);
+    await updatePattern({ id, is_enabled: value });
   };
 
   if (loading) {

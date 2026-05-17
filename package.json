@@ -5,6 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "backend": "node backend/server.mjs",
+    "backend:dev": "node backend/server.mjs",
+    "backend:ml": "python3 backend/ml_service.py",
+    "start:all": "concurrently -n 'frontend,backend,ml' -c 'cyan,green,magenta' 'npm run dev' 'npm run backend' 'python3 backend/ml_service.py'",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -12,6 +16,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",
+    "@tanstack/react-query": "^5.100.9",
     "@types/d3": "^7.4.3",
     "d3": "^7.9.0",
     "lucide-react": "^0.344.0",
@@ -25,6 +30,7 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.18",
+    "concurrently": "^9.2.1",
     "eslint": "^9.9.1",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.11",

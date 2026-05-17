@@ -5,6 +5,7 @@ import FundFlowGraph from './pages/FundFlowGraph';
 import FraudAlerts from './pages/FraudAlerts';
 import Reports from './pages/Reports';
 import FederatedNetwork from './pages/FederatedNetwork';
+import TransactionSimulator from './pages/TransactionSimulator';
 import Settings from './pages/Settings';
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
           <Route path="alerts" element={<FraudAlerts />} />
           <Route path="reports" element={<Reports />} />
           <Route path="federated" element={<FederatedNetwork />} />
+          <Route path="simulator" element={<TransactionSimulator />} />
           <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>

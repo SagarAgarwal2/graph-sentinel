@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import { Shield, Lock, Activity, CheckCircle, Wifi, RefreshCw } from 'lucide-react';
-import { supabase, type FederatedNode } from '../lib/supabase';
+import { type FederatedNode } from '../lib/supabase';
 import { timeAgo } from '../lib/formatters';
+import { fetchFederatedNodes } from '../lib/api';
 
 const FEDERATED_ROUNDS = [
   { round: 1, f1: 0.71 }, { round: 2, f1: 0.75 }, { round: 3, f1: 0.79 },
@@ -18,8 +19,7 @@ export default function FederatedNetwork() {
   const [selectedNode, setSelectedNode] = useState<FederatedNode | null>(null);
 
   useEffect(() => {
-    supabase.from('federated_nodes').select('*').order('alerts_contributed', { ascending: false })
-      .then(({ data }) => { setNodes(data || []); setLoading(false); });
+    fetchFederatedNodes().then((data) => { setNodes(data); setLoading(false); });
   }, []);
 
   useEffect(() => {

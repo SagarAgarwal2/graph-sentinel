@@ -3,10 +3,11 @@ import {
   ShieldAlert, X, CheckCircle, XCircle, ChevronDown, ChevronUp,
   MessageSquare, AlertTriangle, Clock, TrendingUp, User, ChevronRight,
 } from 'lucide-react';
-import { supabase, type FraudAlert, type Account, type InvestigatorFeedback } from '../lib/supabase';
+import { type FraudAlert, type Account, type InvestigatorFeedback } from '../lib/supabase';
 import {
   formatCurrency, formatDateTime, timeAgo, patternLabel, severityBg, statusBg,
 } from '../lib/formatters';
+import { fetchAccounts, fetchAlerts, fetchFeedback, postFeedback, updateAlert } from '../lib/api';
 
 const STATUS_TABS = ['all', 'open', 'confirmed', 'dismissed'];
 
@@ -31,24 +32,19 @@ export default function FraudAlerts() {
 
   useEffect(() => {
     const load = async () => {
-      const [alertRes, accRes] = await Promise.all([
-        supabase.from('fraud_alerts').select('*').order('created_at', { ascending: false }),
-        supabase.from('accounts').select('*'),
+      const [alertData, accountData] = await Promise.all([
+        fetchAlerts(),
+        fetchAccounts(),
       ]);
-      setAlerts(alertRes.data || []);
-      setAccounts(new Map((accRes.data || []).map((a) => [a.id, a])));
+      setAlerts(alertData);
+      setAccounts(new Map(accountData.map((a) => [a.id, a])));
       setLoading(false);
     };
     load();
   }, []);
 
   const loadFeedback = async (alertId: string) => {
-    const { data } = await supabase
-      .from('investigator_feedback')
-      .select('*')
-      .eq('alert_id', alertId)
-      .order('created_at', { ascending: false });
-    setFeedback(data || []);
+    setFeedback(await fetchFeedback(alertId));
   };
 
   const selectAlert = (a: FraudAlert) => {
@@ -60,10 +56,10 @@ export default function FraudAlerts() {
   const updateAlertStatus = async (status: string) => {
     if (!selectedAlert) return;
     setActionLoading(true);
-    await supabase.from('fraud_alerts').update({ status, updated_at: new Date().toISOString() }).eq('id', selectedAlert.id);
-    await supabase.from('investigator_feedback').insert({
-      id: `FB_${Date.now()}`,
+    await updateAlert({ id: selectedAlert.id, status, updated_at: new Date().toISOString() });
+    await postFeedback({
       alert_id: selectedAlert.id,
+      status,
       investigator_action: status === 'confirmed' ? 'confirmed' : 'dismissed',
       investigator_name: 'Investigator Arjun Mehta',
       notes: noteText || `Alert ${status} by investigator.`,
@@ -394,9 +390,9 @@ export default function FraudAlerts() {
                   onClick={async () => {
                     if (!noteText.trim()) return;
                     setActionLoading(true);
-                    await supabase.from('investigator_feedback').insert({
-                      id: `FB_${Date.now()}`,
+                    await postFeedback({
                       alert_id: selectedAlert.id,
+                      status: selectedAlert.status,
                       investigator_action: 'note_added',
                       investigator_name: 'Investigator Arjun Mehta',
                       notes: noteText,

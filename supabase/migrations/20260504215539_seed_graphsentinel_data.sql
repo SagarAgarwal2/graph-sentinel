@@ -47,6 +47,26 @@ INSERT INTO accounts (id, holder_name, bank_branch, account_type, declared_profe
 ('ACC_N18', 'Smita Bhatt', 'Vadodara Alkapuri', 'savings', 'dentist', 1100000, now() - interval '3 years', now() - interval '5 days', false, 10, 'low'),
 ('ACC_N19', 'Prakash Reddy', 'Vijayawada Benz Circle', 'savings', 'software_engineer', 1400000, now() - interval '2 years', now() - interval '1 day', false, 13, 'low'),
 ('ACC_N20', 'Harini Subramanian', 'Coimbatore RS Puram', 'savings', 'manager', 950000, now() - interval '4 years', now() - interval '6 days', false, 9, 'low'),
+('ACC_N21', 'Aman Verma', 'Mumbai Main', 'savings', 'salaried', 1500000, now() - interval '2 years', now() - interval '3 days', false, 10, 'low'),
+('ACC_N22', 'Ritu Sen', 'Delhi Central', 'savings', 'designer', 1100000, now() - interval '1 year', now() - interval '4 days', false, 12, 'low'),
+('ACC_N23', 'Kunal Shah', 'Ahmedabad West', 'current', 'consultant', 2200000, now() - interval '3 years', now() - interval '1 day', false, 14, 'low'),
+('ACC_N24', 'Neha Kapoor', 'Pune Shivajinagar', 'savings', 'writer', 800000, now() - interval '2 years', now() - interval '5 days', false, 8, 'low'),
+('ACC_N25', 'Siddharth Roy', 'Bangalore Koramangala', 'savings', 'analyst', 1300000, now() - interval '1 year', now() - interval '2 days', false, 11, 'low'),
+('ACC_N26', 'Meenakshi Iyer', 'Chennai T Nagar', 'savings', 'architect', 1700000, now() - interval '4 years', now() - interval '6 days', false, 9, 'low'),
+('ACC_N27', 'Gautam Banerjee', 'Kolkata Park Street', 'current', 'exporter', 6000000, now() - interval '5 years', now() - interval '1 day', false, 16, 'low'),
+('ACC_N28', 'Anjali Menon', 'Kochi MG Road', 'savings', 'researcher', 950000, now() - interval '2 years', now() - interval '3 days', false, 7, 'low'),
+('ACC_N29', 'Hardik Patel', 'Surat Ring Road', 'current', 'textile_owner', 7500000, now() - interval '6 years', now() - interval '2 days', false, 15, 'low'),
+('ACC_N30', 'Vasundhara Raju', 'Hyderabad Jubilee Hills', 'savings', 'scientist', 2100000, now() - interval '3 years', now() - interval '4 days', false, 10, 'low'),
+('ACC_N31', 'Abhishek Mishra', 'Jaipur MI Road', 'savings', 'merchant', 1250000, now() - interval '2 years', now() - interval '1 day', false, 13, 'low'),
+('ACC_N32', 'Kiran Rastogi', 'Lucknow Hazratganj', 'savings', 'artist', 650000, now() - interval '4 years', now() - interval '7 days', false, 6, 'low'),
+('ACC_N33', 'Devendra Yadav', 'Bhopal DB Mall', 'current', 'builder', 4500000, now() - interval '5 years', now() - interval '2 days', false, 18, 'low'),
+('ACC_N34', 'Shalini Deshmukh', 'Nagpur Sitabuldi', 'savings', 'officer', 850000, now() - interval '3 years', now() - interval '5 days', false, 9, 'low'),
+('ACC_N35', 'Sandeep Malviya', 'Indore Vijay Nagar', 'savings', 'salaried', 1050000, now() - interval '2 years', now() - interval '3 days', false, 11, 'low'),
+('ACC_N36', 'Prerna Jha', 'Patna Gandhi Maidan', 'savings', 'academic', 750000, now() - interval '1 year', now() - interval '6 days', false, 8, 'low'),
+('ACC_N37', 'Sarabjit Singh', 'Chandigarh Sector 17', 'current', 'farmer_agent', 3500000, now() - interval '6 years', now() - interval '1 day', false, 19, 'low'),
+('ACC_N38', 'Tanvi Mehta', 'Vadodara Alkapuri', 'savings', 'salaried', 1200000, now() - interval '3 years', now() - interval '4 days', false, 10, 'low'),
+('ACC_N39', 'Raghavendra Rao', 'Vijayawada Benz Circle', 'savings', 'accountant', 900000, now() - interval '2 years', now() - interval '5 days', false, 8, 'low'),
+('ACC_N40', 'Sujatha Chandran', 'Coimbatore RS Puram', 'savings', 'salaried', 1150000, now() - interval '4 years', now() - interval '2 days', false, 9, 'low'),
 
 -- Multi-hop layering accounts (A01-A06)
 ('ACC_A01', 'Prakash Dubey', 'Mumbai Fort', 'current', 'consultant', 1000000, now() - interval '1 year', now() - interval '2 days', false, 78, 'high'),
@@ -95,7 +115,27 @@ INSERT INTO accounts (id, holder_name, bank_branch, account_type, declared_profe
 ('ACC_M12', 'Joseph Thomas', 'Thiruvananthapuram Kowdiar', 'savings', 'plumber', 320000, now() - interval '2 years', now() - interval '8 days', false, 29, 'medium'),
 ('ACC_M13', 'Arjun Pillai', 'Kochi Edappally', 'savings', 'fisherman', 280000, now() - interval '4 years', now() - interval '14 days', false, 23, 'medium'),
 ('ACC_M14', 'Nalini Devi', 'Chennai Mylapore', 'savings', 'cook', 260000, now() - interval '3 years', now() - interval '9 days', false, 21, 'medium'),
-('ACC_M15', 'Muthu Krishnan', 'Madurai South Masi Street', 'current', 'small_business', 450000, now() - interval '6 years', now() - interval '5 days', false, 33, 'medium')
+('ACC_M15', 'Muthu Krishnan', 'Madurai South Masi Street', 'current', 'small_business', 450000, now() - interval '6 years', now() - interval '5 days', false, 33, 'medium'),
+-- Fan-Out/Fan-In Pattern Accounts (F01-F08)
+('ACC_F01', 'Vikram Enterprises Hub', 'Mumbai Main', 'current', 'trading', 12000000, now() - interval '1 year', now() - interval '1 day', false, 84, 'critical'),
+('ACC_F02', 'F_Dest_01', 'Pune Shivajinagar', 'savings', 'salaried', 500000, now() - interval '2 years', now() - interval '1 day', false, 45, 'medium'),
+('ACC_F03', 'F_Dest_02', 'Delhi Central', 'savings', 'salaried', 600000, now() - interval '2 years', now() - interval '1 day', false, 48, 'medium'),
+('ACC_F04', 'F_Dest_03', 'Ahmedabad West', 'savings', 'salaried', 400000, now() - interval '3 years', now() - interval '1 day', false, 42, 'medium'),
+('ACC_F05', 'F_Dest_04', 'Chennai T Nagar', 'savings', 'salaried', 700000, now() - interval '1 year', now() - interval '1 day', false, 51, 'medium'),
+('ACC_F06', 'F_Dest_05', 'Kolkata Park Street', 'savings', 'salaried', 550000, now() - interval '2 years', now() - interval '1 day', false, 44, 'medium'),
+('ACC_F07', 'F_Dest_06', 'Bangalore Koramangala', 'savings', 'salaried', 800000, now() - interval '3 years', now() - interval '1 day', false, 49, 'medium'),
+('ACC_F08', 'Consolidated Aggregations', 'Mumbai Main', 'current', 'trading', 15000000, now() - interval '1 year', now() - interval '1 day', false, 82, 'critical'),
+-- Velocity Spike Accounts (V01-V03)
+('ACC_V01', 'Anand Sharma Rapid', 'Delhi Central', 'savings', 'trader', 1800000, now() - interval '2 years', now() - interval '1 hour', false, 79, 'high'),
+('ACC_V02', 'Karan Johar Rapid', 'Mumbai Main', 'savings', 'salaried', 2400000, now() - interval '1 year', now() - interval '2 hours', false, 72, 'high'),
+('ACC_V03', 'Siddharth Malhotra Rapid', 'Bangalore Koramangala', 'savings', 'trader', 3100000, now() - interval '3 years', now() - interval '3 hours', false, 75, 'high'),
+-- Cross Border Layering Accounts (X01-X06)
+('ACC_X01', 'Delhi Exports Gateway', 'Delhi Central', 'current', 'export', 9000000, now() - interval '2 years', now() - interval '1 day', false, 81, 'critical'),
+('ACC_X02', 'Mumbai Imports Intermediate', 'Mumbai Main', 'current', 'import', 8000000, now() - interval '2 years', now() - interval '1 day', false, 78, 'high'),
+('ACC_X03', 'Kolkata Trading Intermediate', 'Kolkata Park Street', 'current', 'trading', 7500000, now() - interval '3 years', now() - interval '1 day', false, 74, 'high'),
+('ACC_X04', 'Chennai Ventures Intermediate', 'Chennai T Nagar', 'current', 'investment', 6000000, now() - interval '1 year', now() - interval '1 day', false, 71, 'high'),
+('ACC_X05', 'Bangalore Logistics Intermediate', 'Bangalore Koramangala', 'current', 'logistics', 8500000, now() - interval '2 years', now() - interval '1 day', false, 76, 'high'),
+('ACC_X06', 'Hyderabad Holdings Final', 'Hyderabad Jubilee Hills', 'current', 'holding', 11000000, now() - interval '1 year', now() - interval '1 day', false, 85, 'critical')
 ON CONFLICT (id) DO NOTHING;
 
 -- Update dormant account
@@ -206,7 +246,60 @@ INSERT INTO transactions (id, sender_account_id, receiver_account_id, amount, ch
 ('TXN_T007', 'ACC_C01', 'ACC_C02', 995000, 'NEFT', 'NEFT2024TD007', 'completed', now() - interval '15 minutes'),
 ('TXN_T008', 'ACC_N13', 'ACC_N18', 88000, 'NEFT', 'NEFT2024TD008', 'completed', now() - interval '2 hours'),
 ('TXN_T009', 'ACC_N07', 'ACC_N16', 55000, 'NEFT', 'NEFT2024TD009', 'completed', now() - interval '2 hours 30 minutes'),
-('TXN_T010', 'ACC_N20', 'ACC_N04', 22000, 'UPI', 'UPI2024TD010', 'completed', now() - interval '3 hours')
+('TXN_T010', 'ACC_N20', 'ACC_N04', 22000, 'UPI', 'UPI2024TD010', 'completed', now() - interval '3 hours'),
+-- Additional normal transactions (N021-N060)
+('TXN_N021', 'ACC_N21', 'ACC_N22', 75000, 'NEFT', 'NEFT2024N021', 'completed', now() - interval '4 days'),
+('TXN_N022', 'ACC_N23', 'ACC_N24', 140000, 'RTGS', 'RTGS2024N022', 'completed', now() - interval '3 days'),
+('TXN_N023', 'ACC_N25', 'ACC_N26', 15000, 'UPI', 'UPI2024N023', 'completed', now() - interval '3 days'),
+('TXN_N024', 'ACC_N27', 'ACC_N28', 35000, 'NEFT', 'NEFT2024N024', 'completed', now() - interval '2 days'),
+('TXN_N025', 'ACC_N29', 'ACC_N30', 600000, 'RTGS', 'RTGS2024N025', 'completed', now() - interval '2 days'),
+('TXN_N026', 'ACC_N31', 'ACC_N32', 25000, 'UPI', 'UPI2024N026', 'completed', now() - interval '1 day'),
+('TXN_N027', 'ACC_N33', 'ACC_N34', 85000, 'NEFT', 'NEFT2024N027', 'completed', now() - interval '1 day'),
+('TXN_N028', 'ACC_N35', 'ACC_N36', 45000, 'NEFT', 'NEFT2024N028', 'completed', now() - interval '12 hours'),
+('TXN_N029', 'ACC_N37', 'ACC_N38', 300000, 'RTGS', 'RTGS2024N029', 'completed', now() - interval '8 hours'),
+('TXN_N030', 'ACC_N39', 'ACC_N40', 18000, 'UPI', 'UPI2024N030', 'completed', now() - interval '4 hours'),
+('TXN_N031', 'ACC_N21', 'ACC_N25', 95000, 'NEFT', 'NEFT2024N031', 'completed', now() - interval '5 days'),
+('TXN_N032', 'ACC_N22', 'ACC_N29', 420000, 'RTGS', 'RTGS2024N032', 'completed', now() - interval '5 days'),
+('TXN_N033', 'ACC_N23', 'ACC_N27', 115000, 'NEFT', 'NEFT2024N033', 'completed', now() - interval '4 days'),
+('TXN_N034', 'ACC_N30', 'ACC_N35', 52000, 'UPI', 'UPI2024N034', 'completed', now() - interval '4 days'),
+('TXN_N035', 'ACC_N24', 'ACC_N31', 38000, 'NEFT', 'NEFT2024N035', 'completed', now() - interval '3 days'),
+('TXN_N036', 'ACC_N26', 'ACC_N33', 76000, 'NEFT', 'NEFT2024N036', 'completed', now() - interval '3 days'),
+('TXN_N037', 'ACC_N28', 'ACC_N37', 225000, 'RTGS', 'RTGS2024N037', 'completed', now() - interval '2 days'),
+('TXN_N038', 'ACC_N32', 'ACC_N39', 98000, 'NEFT', 'NEFT2024N038', 'completed', now() - interval '2 days'),
+('TXN_N039', 'ACC_N34', 'ACC_N40', 25000, 'UPI', 'UPI2024N039', 'completed', now() - interval '1 day'),
+('TXN_N040', 'ACC_N36', 'ACC_N38', 43000, 'NEFT', 'NEFT2024N040', 'completed', now() - interval '1 day'),
+-- Fan-Out / Fan-In Transactions (F01-F08)
+('TXN_F001', 'ACC_F01', 'ACC_F02', 1500000, 'NEFT', 'NEFT2024F001', 'completed', now() - interval '1 day' - interval '12 hours'),
+('TXN_F002', 'ACC_F01', 'ACC_F03', 1600000, 'NEFT', 'NEFT2024F002', 'completed', now() - interval '1 day' - interval '12 hours'),
+('TXN_F003', 'ACC_F01', 'ACC_F04', 1400000, 'NEFT', 'NEFT2024F003', 'completed', now() - interval '1 day' - interval '12 hours'),
+('TXN_F004', 'ACC_F01', 'ACC_F05', 1700000, 'NEFT', 'NEFT2024F004', 'completed', now() - interval '1 day' - interval '12 hours'),
+('TXN_F005', 'ACC_F01', 'ACC_F06', 1550000, 'NEFT', 'NEFT2024F005', 'completed', now() - interval '1 day' - interval '12 hours'),
+('TXN_F006', 'ACC_F01', 'ACC_F07', 1650000, 'NEFT', 'NEFT2024F006', 'completed', now() - interval '1 day' - interval '12 hours'),
+('TXN_F007', 'ACC_F02', 'ACC_F08', 1480000, 'NEFT', 'NEFT2024F007', 'completed', now() - interval '1 day' - interval '10 hours'),
+('TXN_F008', 'ACC_F03', 'ACC_F08', 1580000, 'NEFT', 'NEFT2024F008', 'completed', now() - interval '1 day' - interval '10 hours'),
+('TXN_F009', 'ACC_F04', 'ACC_F08', 1380000, 'NEFT', 'NEFT2024F009', 'completed', now() - interval '1 day' - interval '10 hours'),
+('TXN_F010', 'ACC_F05', 'ACC_F08', 1680000, 'NEFT', 'NEFT2024F010', 'completed', now() - interval '1 day' - interval '10 hours'),
+('TXN_F011', 'ACC_F06', 'ACC_F08', 1530000, 'NEFT', 'NEFT2024F011', 'completed', now() - interval '1 day' - interval '10 hours'),
+('TXN_F012', 'ACC_F07', 'ACC_F08', 1630000, 'NEFT', 'NEFT2024F012', 'completed', now() - interval '1 day' - interval '10 hours'),
+-- Velocity Spike Transactions
+('TXN_V001', 'ACC_V01', 'ACC_N21', 150000, 'UPI', 'UPI2024V001', 'completed', now() - interval '10 hours'),
+('TXN_V002', 'ACC_V01', 'ACC_N22', 120000, 'UPI', 'UPI2024V002', 'completed', now() - interval '9 hours 30 minutes'),
+('TXN_V003', 'ACC_V01', 'ACC_N23', 130000, 'UPI', 'UPI2024V003', 'completed', now() - interval '9 hours'),
+('TXN_V004', 'ACC_V01', 'ACC_N24', 160000, 'UPI', 'UPI2024V004', 'completed', now() - interval '8 hours 30 minutes'),
+('TXN_V005', 'ACC_V01', 'ACC_N25', 140000, 'UPI', 'UPI2024V005', 'completed', now() - interval '8 hours'),
+('TXN_V006', 'ACC_V01', 'ACC_N26', 150000, 'UPI', 'UPI2024V006', 'completed', now() - interval '7 hours 30 minutes'),
+('TXN_V007', 'ACC_V01', 'ACC_N27', 170000, 'UPI', 'UPI2024V007', 'completed', now() - interval '7 hours'),
+('TXN_V008', 'ACC_V01', 'ACC_N28', 110000, 'UPI', 'UPI2024V008', 'completed', now() - interval '6 hours 30 minutes'),
+('TXN_V009', 'ACC_V01', 'ACC_N29', 125000, 'UPI', 'UPI2024V009', 'completed', now() - interval '6 hours'),
+('TXN_V010', 'ACC_V01', 'ACC_N30', 135000, 'UPI', 'UPI2024V010', 'completed', now() - interval '5 hours 30 minutes'),
+('TXN_V011', 'ACC_V01', 'ACC_N31', 145000, 'UPI', 'UPI2024V011', 'completed', now() - interval '5 hours'),
+('TXN_V012', 'ACC_V01', 'ACC_N32', 155000, 'UPI', 'UPI2024V012', 'completed', now() - interval '4 hours 30 minutes'),
+-- Cross-Border Layering Transactions (X01 -> X02 -> X03 -> X04 -> X05 -> X06)
+('TXN_X001', 'ACC_X01', 'ACC_X02', 8500000, 'RTGS', 'RTGS2024X001', 'completed', now() - interval '2 days' - interval '10 hours'),
+('TXN_X002', 'ACC_X02', 'ACC_X03', 8400000, 'RTGS', 'RTGS2024X002', 'completed', now() - interval '2 days' - interval '8 hours'),
+('TXN_X003', 'ACC_X03', 'ACC_X04', 8300000, 'RTGS', 'RTGS2024X003', 'completed', now() - interval '2 days' - interval '6 hours'),
+('TXN_X004', 'ACC_X04', 'ACC_X05', 8200000, 'RTGS', 'RTGS2024X004', 'completed', now() - interval '2 days' - interval '4 hours'),
+('TXN_X005', 'ACC_X05', 'ACC_X06', 8100000, 'RTGS', 'RTGS2024X005', 'completed', now() - interval '2 days' - interval '2 hours')
 ON CONFLICT (id) DO NOTHING;
 
 -- Seed graph_edges (derived from transactions)
@@ -246,7 +339,28 @@ INSERT INTO graph_edges (id, source_account_id, target_account_id, total_amount,
 ('EDGE_E01_E04', 'ACC_E01', 'ACC_E04', 7200000, 1, now() - interval '10 days', true),
 ('EDGE_M01_N01', 'ACC_M01', 'ACC_N01', 15000, 1, now() - interval '3 days', false),
 ('EDGE_M03_N03', 'ACC_M03', 'ACC_N03', 85000, 1, now() - interval '5 days', false),
-('EDGE_N01_N03', 'ACC_N01', 'ACC_N03', 180000, 1, now() - interval '30 minutes', false)
+('EDGE_N01_N03', 'ACC_N01', 'ACC_N03', 180000, 1, now() - interval '30 minutes', false),
+-- Fan-Out / Fan-In Edges
+('EDGE_F01_F02', 'ACC_F01', 'ACC_F02', 1500000, 1, now() - interval '1 day', true),
+('EDGE_F01_F03', 'ACC_F01', 'ACC_F03', 1600000, 1, now() - interval '1 day', true),
+('EDGE_F01_F04', 'ACC_F01', 'ACC_F04', 1400000, 1, now() - interval '1 day', true),
+('EDGE_F01_F05', 'ACC_F01', 'ACC_F05', 1700000, 1, now() - interval '1 day', true),
+('EDGE_F01_F06', 'ACC_F01', 'ACC_F06', 1550000, 1, now() - interval '1 day', true),
+('EDGE_F01_F07', 'ACC_F01', 'ACC_F07', 1650000, 1, now() - interval '1 day', true),
+('EDGE_F02_F08', 'ACC_F02', 'ACC_F08', 1480000, 1, now() - interval '1 day', true),
+('EDGE_F03_F08', 'ACC_F03', 'ACC_F08', 1580000, 1, now() - interval '1 day', true),
+('EDGE_F04_F08', 'ACC_F04', 'ACC_F08', 1380000, 1, now() - interval '1 day', true),
+('EDGE_F05_F08', 'ACC_F05', 'ACC_F08', 1680000, 1, now() - interval '1 day', true),
+('EDGE_F06_F08', 'ACC_F06', 'ACC_F08', 1530000, 1, now() - interval '1 day', true),
+('EDGE_F07_F08', 'ACC_F07', 'ACC_F08', 1630000, 1, now() - interval '1 day', true),
+-- Velocity Spike Edges
+('EDGE_V01_N21', 'ACC_V01', 'ACC_N21', 150000, 1, now() - interval '10 hours', true),
+-- Cross-Border Layering Edges
+('EDGE_X01_X02', 'ACC_X01', 'ACC_X02', 8500000, 1, now() - interval '2 days', true),
+('EDGE_X02_X03', 'ACC_X02', 'ACC_X03', 8400000, 1, now() - interval '2 days', true),
+('EDGE_X03_X04', 'ACC_X03', 'ACC_X04', 8300000, 1, now() - interval '2 days', true),
+('EDGE_X04_X05', 'ACC_X04', 'ACC_X05', 8200000, 1, now() - interval '2 days', true),
+('EDGE_X05_X06', 'ACC_X05', 'ACC_X06', 8100000, 1, now() - interval '2 days', true)
 ON CONFLICT (id) DO NOTHING;
 
 -- Seed fraud_alerts
@@ -348,6 +462,48 @@ INSERT INTO fraud_alerts (id, pattern_type, involved_accounts, linked_transactio
   'dismissed',
   'Investigator Kavitha Nair',
   now() - interval '4 days'
+),
+(
+  'ALT_FOFI001',
+  'fan_out_fan_in',
+  ARRAY['ACC_F01','ACC_F02','ACC_F03','ACC_F04','ACC_F05','ACC_F06','ACC_F07','ACC_F08'],
+  ARRAY['TXN_F001','TXN_F002','TXN_F003','TXN_F004','TXN_F005','TXN_F006','TXN_F007','TXN_F008','TXN_F009','TXN_F010','TXN_F011','TXN_F012'],
+  9400000,
+  0.92,
+  'A classic fan-out/fan-in consolidation pattern was detected. Primary hub ACC_F01 (Vikram Enterprises Hub, Mumbai Main) distributed ₹9.4Cr in aggregate to 6 recipient accounts (F02-F07) within 2 hours. Within 2 hours of receiving, these 6 accounts forwarded 98-99% of their balances to the consolidation hub ACC_F08 (Consolidated Aggregations, Mumbai Main), effectively laundering the entire amount through distinct pipelines. This mirrors structural smurfing at scale. Integrated Gradients attribution assigns high importance to fan-out ratio, transaction velocity, and terminal consolidation aggregation.',
+  '[{"factor": "6-channel parallel fan-out distribution", "weight": 0.42, "direction": "increases_risk"}, {"factor": "98% consolidated aggregation to F08", "weight": 0.35, "direction": "increases_risk"}, {"factor": "Immediate sub-2 hour forwarding velocity", "weight": 0.23, "direction": "increases_risk"}]',
+  'critical',
+  'open',
+  'Investigator Arjun Mehta',
+  now() - interval '1 day'
+),
+(
+  'ALT_VEL001',
+  'velocity_spike',
+  ARRAY['ACC_V01'],
+  ARRAY['TXN_V001','TXN_V002','TXN_V003','TXN_V004','TXN_V005','TXN_V006','TXN_V007','TXN_V008','TXN_V009','TXN_V010','TXN_V011','TXN_V012'],
+  1750000,
+  0.86,
+  'An extraordinary transaction velocity spike was identified on ACC_V01 (Anand Sharma Rapid, Delhi Central). The account suddenly executed 12 separate outgoing UPI transactions within a rapid 6-hour window, totaling ₹17.5 Lakhs. This represents a 4.5x increase in daily transaction frequency compared to its rolling 30-day baseline. This rapid sequence behavior is common in cash-out operations or automated mule activity. Key attribution: outgoing frequency spike (55%), multi-recipient distribution (28%), UPI channel execution (17%).',
+  '[{"factor": "12 transactions within 6 hours", "weight": 0.55, "direction": "increases_risk"}, {"factor": "4.5x surge over historical velocity baseline", "weight": 0.28, "direction": "increases_risk"}, {"factor": "Exclusive UPI channel execution", "weight": 0.17, "direction": "increases_risk"}]',
+  'high',
+  'open',
+  'Investigator Priya Sharma',
+  now() - interval '10 hours'
+),
+(
+  'ALT_CBL001',
+  'cross_border_layering',
+  ARRAY['ACC_X01','ACC_X02','ACC_X03','ACC_X04','ACC_X05','ACC_X06'],
+  ARRAY['TXN_X001','TXN_X002','TXN_X003','TXN_X004','TXN_X005'],
+  8500000,
+  0.95,
+  'A highly sophisticated multi-branch cross-border layering chain of 5 hops was detected. Funds of ₹8.5Cr originated from Delhi Central (ACC_X01) and routed successively through Mumbai Main (ACC_X02), Kolkata Park Street (ACC_X03), Chennai T Nagar (ACC_X04), Bangalore Koramangala (ACC_X05), and finally settled in Hyderabad Jubilee Hills (ACC_X06) — all within 10 hours. Spanning 6 distinct city branches across the country indicates a deliberate attempt to evade regional audit controls and exploit inter-state clearing latency. SHAP / IG analysis confirms regional branch dispersion (45%), hop sequence completion (35%), and transaction size consistency (20%) as major suspicious drivers.',
+  '[{"factor": "6 distinct city-branch dispersion", "weight": 0.45, "direction": "increases_risk"}, {"factor": "5-hop linear routing completed in 10h", "weight": 0.35, "direction": "increases_risk"}, {"factor": "98.5% value retention across hops", "weight": 0.20, "direction": "increases_risk"}]',
+  'critical',
+  'open',
+  'Investigator Priya Sharma',
+  now() - interval '2 days'
 )
 ON CONFLICT (id) DO NOTHING;
 

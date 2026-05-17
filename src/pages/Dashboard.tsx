@@ -4,7 +4,8 @@ import {
   TrendingUp, ShieldAlert, FileText, Activity,
   ArrowUpRight, ArrowRight, BarChart2,
 } from 'lucide-react';
-import { supabase, type Transaction, type FraudAlert } from '../lib/supabase';
+import { type Transaction, type FraudAlert } from '../lib/supabase';
+import { fetchAlerts, fetchDashboardSummary, fetchTransactions, fetchReports } from '../lib/api';
 import {
   formatCurrency, timeAgo, channelColor,
   severityBg, patternLabel, statusBg,
@@ -51,16 +52,16 @@ export default function Dashboard() {
 
   useEffect(() => {
     const load = async () => {
-      const [txnRes, alertRes, reportRes, txnCount] = await Promise.all([
-        supabase.from('transactions').select('*').order('timestamp', { ascending: false }).limit(20),
-        supabase.from('fraud_alerts').select('*').order('created_at', { ascending: false }).limit(10),
-        supabase.from('str_ctr_reports').select('*', { count: 'exact', head: true }).eq('submission_status', 'draft'),
-        supabase.from('transactions').select('*', { count: 'exact', head: true }),
+      const [txnData, alertData, reportData, summary] = await Promise.all([
+        fetchTransactions(20),
+        fetchAlerts(),
+        fetchReports(),
+        fetchDashboardSummary(),
       ]);
-      setRecentTxns(txnRes.data || []);
-      setAlerts(alertRes.data || []);
-      setPendingReports(reportRes.count || 0);
-      setTotalTxns(txnCount.count || 0);
+      setRecentTxns(txnData);
+      setAlerts(alertData);
+      setPendingReports(reportData.filter((report) => report.submission_status === 'draft').length);
+      setTotalTxns(summary.transactions || txnData.length);
       setLoading(false);
     };
     load();

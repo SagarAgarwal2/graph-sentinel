@@ -4,8 +4,9 @@ import {
   ZoomIn, ZoomOut, RotateCcw, X, ChevronRight,
   AlertTriangle, User, Building, SlidersHorizontal,
 } from 'lucide-react';
-import { supabase, type Account, type GraphEdge, type FraudAlert } from '../lib/supabase';
+import { type Account, type GraphEdge, type FraudAlert } from '../lib/supabase';
 import { formatCurrency, timeAgo, riskColor, patternLabel, severityBg } from '../lib/formatters';
+import { fetchAlerts, fetchGraph } from '../lib/api';
 
 type NodeDatum = d3.SimulationNodeDatum & {
   id: string; account: Account; radius: number; color: string;
@@ -32,14 +33,13 @@ export default function FundFlowGraph() {
 
   useEffect(() => {
     const load = async () => {
-      const [accRes, edgeRes, alertRes] = await Promise.all([
-        supabase.from('accounts').select('*'),
-        supabase.from('graph_edges').select('*'),
-        supabase.from('fraud_alerts').select('*'),
+      const [graphData, alertData] = await Promise.all([
+        fetchGraph(),
+        fetchAlerts(),
       ]);
-      setAccounts(accRes.data || []);
-      setEdges(edgeRes.data || []);
-      setAlerts(alertRes.data || []);
+      setAccounts(graphData.nodes || []);
+      setEdges((graphData.edges as GraphEdge[]) || []);
+      setAlerts(alertData);
       setLoading(false);
     };
     load();
@@ -214,9 +214,9 @@ export default function FundFlowGraph() {
         const tgt = l.target as NodeDatum;
         if (!src.x || !tgt.x) return;
         g.append('circle').attr('r', 2.5).attr('fill', '#EF4444').attr('opacity', 0.85)
-          .attr('cx', src.x).attr('cy', src.y)
+          .attr('cx', src.x ?? 0).attr('cy', src.y ?? 0)
           .transition().duration(1600).ease(d3.easeLinear)
-          .attr('cx', tgt.x).attr('cy', tgt.y).attr('opacity', 0).remove();
+          .attr('cx', tgt.x ?? 0).attr('cy', tgt.y ?? 0).attr('opacity', 0).remove();
       });
     };
     const interval = setInterval(animateParticles, 900);
